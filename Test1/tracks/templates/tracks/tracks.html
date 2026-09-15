@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<table border="1" style="width: 1000px; height: 250px">
+    <tr>
+        <th>Course Code</th>
+        <th>Course</th>
+        <th>Action</th>
+        {% for track in tracks %}
+            <tr>
+                <td>{{track.id}}</td>
+                <td>{{track.course}}</td>
+                <td>
+                    <a href="{% url 'findTrack' track.id%}">Update</a>
+                    <br><br><a href="{% url 'removeTrack' track.id%}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+</table>
+<br>
+<a href="{% url 'insertTrack'%}">Insert</a>
+{% endblock %}

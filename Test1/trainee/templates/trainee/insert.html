@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<form action="" method="post">
+        {% csrf_token %}
+        <label class="ins" for="name">Trainee Name</label>
+        <input type="text" name="tname" id="name">
+        <br><br>
+        <label class="ins" for="email">Trainee Email</label>
+        <input type="email" name="temail" id="email">
+        <br><br>
+        <label class="ins" for="trpho">Trainee Phone Number</label>
+        <input type="number" name="tnum" id="trpho">
+        <br><br>
+        <button type="submit">Add</button>
+    </form>
+{% endblock %}

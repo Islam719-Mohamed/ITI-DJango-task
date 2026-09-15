@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<table border="1" style="width: 1000px; height: 250px">
+    <tr>
+        <th>Name</th>
+        <th>E-Mail</th>
+        <th>Phone Number</th>
+        <th>Action</th>
+        {% for trainee in trainees %}
+            <tr>
+                <td>{{trainee.name}}</td>
+                <td>{{trainee.email}}</td>
+                <td>{{trainee.phono}}</td>
+                <td>
+                    <a href="{% url 'findTrainee' trainee.id%}">Update</a>
+                    <br><br><a href="{% url 'removeTrainee' trainee.id%}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+</table>
+<br>
+<a href="{% url 'insertTrainee'%}">Insert</a>
+{% endblock %}

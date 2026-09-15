@@ -1,0 +1,14 @@
+form label{
+    display: inline-block;  
+    width: 65px;
+}
+
+form .snup{
+    display: inline-block;  
+    width: 80px;
+}
+
+form .ins{
+    display: inline-block;  
+    width: 100px;
+}

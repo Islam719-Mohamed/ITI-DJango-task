@@ -1,12 +1,20 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import tracks
 
 # Create your views here.
+def allTrack(request):
+    context = {'tracks': tracks.objects.all()}
+    return render(request, 'tracks/tracks.html', context=context)
+
 def insertTrack(request):
-    return HttpResponse("<h1>Insert a Track</h1>")
+    if request.method == 'POST':
+        pcname = request.POST['cname']
+        tracks.objects.create(course = pcname)
+    return render(request, 'tracks/insert.html')
 
-def removeTrack(request):
-    return HttpResponse("<h1>Remove a Track</h1>")
+def removeTrack(request, id):
+    return HttpResponse(f"<h1>Remove Track {id}</h1>")
 
-def findTrack(request):
-    return HttpResponse("<h1>Search for a Track</h1>")
+def findTrack(request, id):
+    return HttpResponse(f"<h1>Search for Track {id}</h1>")
