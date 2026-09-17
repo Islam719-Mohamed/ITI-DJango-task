@@ -7,12 +7,20 @@
         <th>Name</th>
         <th>E-Mail</th>
         <th>Phone Number</th>
+        <th>Picture</th>
         <th>Action</th>
         {% for trainee in trainees %}
             <tr>
                 <td>{{trainee.name}}</td>
                 <td>{{trainee.email}}</td>
                 <td>{{trainee.phono}}</td>
+                <td>
+                    {% if trainee.pfp %}
+                    <img style="width: 100px" src="{{trainee.pfp.url}}">
+                    {% else %}
+                    <p>No Image</p>
+                    {% endif %}
+                </td>
                 <td>
                     <a href="{% url 'findTrainee' trainee.id%}">Update</a>
                     <br><br><a href="{% url 'removeTrainee' trainee.id%}">Delete</a>

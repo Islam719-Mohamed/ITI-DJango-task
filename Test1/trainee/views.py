@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import trainees
 
@@ -12,11 +12,20 @@ def insertTrainee(request):
         ptname = request.POST['tname']
         ptemail = request.POST['temail']
         ptphono = request.POST['tnum']
-        trainees.objects.create(name = ptname, email = ptemail, phono = ptphono)
+        ptpfp = request.FILES.get('tpfp')
+        trainees.objects.create(name = ptname, email = ptemail, phono = ptphono, pfp = ptpfp)
     return render(request, 'trainee/insert.html')
 
 def removeTrainee(request, id):
-    return HttpResponse(f"<h1>Remove Trainee number {id}</h1>")
+    trainees.objects.filter(id = id).delete()
+    return redirect('/trainee/all/')
 
 def findTrainee(request, id):
-    return HttpResponse(f"<h1>Search for Trainee number {id}</h1>")
+    context = {'trn': trainees.objects.get(id = id)}
+    if request.method == 'POST':
+        pname = request.POST['tuname']
+        pemail = request.POST['tuemail']
+        pphono = request.POST['tunum']
+        trainees.objects.filter(id = id).update(name = pname, email = pemail, phono = pphono)
+        return redirect('/trainee/all/')
+    return render(request, 'trainee/update.html', context = context)

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import tracks
 
@@ -14,7 +14,8 @@ def insertTrack(request):
     return render(request, 'tracks/insert.html')
 
 def removeTrack(request, id):
-    return HttpResponse(f"<h1>Remove Track {id}</h1>")
+    tracks.objects.filter(id = id).update(status = False)
+    return redirect('/tracks/all/')
 
 def findTrack(request, id):
     return HttpResponse(f"<h1>Search for Track {id}</h1>")

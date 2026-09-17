@@ -6,11 +6,20 @@
     <tr>
         <th>Course Code</th>
         <th>Course</th>
+        <th>Status</th>
         <th>Action</th>
         {% for track in tracks %}
             <tr>
                 <td>{{track.id}}</td>
                 <td>{{track.course}}</td>
+                <td>
+                    
+                    {% if track.status %}
+                        <p>Active</p>
+                    {% else %}
+                        <p>Inactive</p>
+                    {% endif %}
+                </td>
                 <td>
                     <a href="{% url 'findTrack' track.id%}">Update</a>
                     <br><br><a href="{% url 'removeTrack' track.id%}">Delete</a>
